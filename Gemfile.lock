@@ -101,6 +101,8 @@ GEM
     debug (1.9.1)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    dockerfile-rails (1.6.1)
+      rails (>= 3.0.0)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -146,6 +148,8 @@ GEM
       net-protocol
     nio4r (2.7.0)
     nokogiri (1.16.0-aarch64-linux)
+      racc (~> 1.4)
+    nokogiri (1.16.0-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.0-x86_64-linux)
       racc (~> 1.4)
@@ -196,6 +200,10 @@ GEM
     rake (13.1.0)
     rdoc (6.6.2)
       psych (>= 4.0.0)
+    redis (5.0.8)
+      redis-client (>= 0.17.0)
+    redis-client (0.19.1)
+      connection_pool
     regexp_parser (2.8.3)
     reline (0.4.1)
       io-console (~> 0.5)
@@ -240,6 +248,7 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  arm64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
@@ -247,12 +256,14 @@ DEPENDENCIES
   capybara
   cssbundling-rails
   debug
+  dockerfile-rails (>= 1.6)
   dotenv-rails
   jbuilder
   jsbundling-rails
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.2)
+  redis (~> 5.0)
   selenium-webdriver
   sprockets-rails
   stimulus-rails
