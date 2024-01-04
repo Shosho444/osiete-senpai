@@ -19,7 +19,7 @@ services:
       - .:/test_app
       - node_modules:/test_app/node_modules
     ports:
-      - 3000:3000
+      - 8080:8080
     stdin_open: true
     tty: true
     depends_on:
