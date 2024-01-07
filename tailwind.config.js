@@ -9,11 +9,8 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        red: {
-          500: "#ef4444",
-        },
-        primary: colors.forest,
+    fontFamily: {
+      fine: ['M PLUS 1p', 'sans-serif'],
       },
     },
   },
