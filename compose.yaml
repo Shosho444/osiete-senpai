@@ -18,12 +18,23 @@ services:
     volumes:
       - .:/test_app
       - node_modules:/test_app/node_modules
+      - bundle_data:/usr/local/bundle:cached
+    environment:
+      TZ: Asia/Tokyo
+      SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
     ports:
       - 8080:8080
     stdin_open: true
     tty: true
     depends_on:
       - db
+      - selenium_chrome
+  selenium_chrome:
+    image: selenium/standalone-chrome-debug
+    platform: linux/amd64
+    ports:
+      - 4444:4444
 volumes:
   postgres_volume:
   node_modules:
+  bundle_data:

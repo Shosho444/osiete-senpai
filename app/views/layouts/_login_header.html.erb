@@ -4,16 +4,16 @@
     <%= link_to "教えて先輩!", root_path, class: "text-green-600 hover:text-gray-300 text-3xl font-fine" %>
 
     <div class="flex space-x-4">
-      <%= link_to login_path ,class: "text-green-600 hover:text-gray-300" do %>
-        <div class="flex flex-col">
-          <i class="fa-solid fa-right-to-bracket fa-lg"></i>
-          <p>ログイン</p>
-        </div>
-      <% end %>
-      <%= link_to  new_user_path, class: "text-green-600 hover:text-gray-300" do %>
+      <%= link_to  "#", class: "text-green-600 hover:text-gray-300" do %>
         <div class="flex flex-col">
           <i class="fa-regular fa-address-card fa-lg"></i>
-          <p>新規登録</p>
+          <p>プロフィール</p>
+        </div>
+      <% end %>
+      <%= link_to  logout_path, class: "text-green-600 hover:text-gray-300", data: { turbo_method: :delete } do %>
+        <div class="flex flex-col">
+          <i class="fa-regular fa-address-card fa-lg"></i>
+          <p>ログアウト</p>
         </div>
       <% end %>
       <a href="#" class="text-green-600 hover:text-gray-300">質問する</a>
