@@ -1,6 +1,15 @@
 class UsersController < ApplicationController
+  skip_before_action :require_login, only: [:new, :create, :show]
+  def show
+    @user = User.find(params[:id])
+  end
+
   def new
     @user = User.new
+  end
+
+  def edit
+    @user = current_user
   end
 
   def create
@@ -11,7 +20,16 @@ class UsersController < ApplicationController
     else
       flash.now[:error] = '登録が失敗しました'
       render :new, status: :unprocessable_entity
-      # エラーメッセージ表示に必要
+    end
+  end
+
+  def update
+    @user = current_user
+    if @user.update(profile_params)
+      redirect_to user_path(current_user), flash: { success: 'プロフィール更新しました' }
+    else
+      flash.now[:error] = 'プロフィールを更新出来ませんでした'
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -19,5 +37,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :email_confirmation, :password, :password_confirmation)
+  end
+
+  def profile_params
+    params.require(:user).permit(:name, :introduction)
   end
 end

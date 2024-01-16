@@ -1,0 +1,29 @@
+<div class="hero bg-white py-28">
+  <div class="shrink-0  shadow-2xl bg-base-100 bg-white rounded-2xl w-2/5 min-w-96">
+    <div class="card-body">
+        <div class="flex justify-center items-center gap-2">
+          <i class="fa-solid fa-circle-user  fa-2x"></i>
+          <p>プロフィール</p>
+        </div>
+        <% if @user == current_user %>
+          <div class="flex">
+            <div>メールアドレス:</div>
+            <p><%= @user.email%></p>
+          </div>
+        <% end %>
+        <div class="flex">
+          <div>名前:</div>
+          <p><%= @user.name%></p>
+        </div>
+        <% if @user.introduction.present? %>
+          <div>
+            <div class="label label-text flex justify-center">紹介</div>
+            <p class="label label-text"><%=@user.introduction%></p>
+          </div>
+        <% end %>
+        <% if @user == current_user %>
+          <%= link_to @user.introduce, edit_user_path, class: "btn bg-green-500 hover:bg-green-600" %>
+        <% end %>
+    </div>
+  </div>
+</div>

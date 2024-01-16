@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'ログイン', type: :system do
   let(:user) { create(:user) }
-  describe 'ログイン' do
+  context 'ログイン' do
     it '正常にログインできる' do
       visit '/login'
       fill_in 'email', with: user.email
@@ -23,7 +23,15 @@ RSpec.describe 'ログイン', type: :system do
     end
   end
 
-  describe 'ログアウト' do
+  context 'ログインしていない場合' do
+    it 'ログインページにリダイレクトされること' do
+      visit edit_user_path(user)
+      expect(current_path).to eq('/login'), 'ログイン失敗時にログイン画面に戻ってきていません'
+      expect(page).to have_content('ログインしてください'), 'フラッシュメッセージ「ログインしてください」が表示されていません'
+    end
+  end
+
+  context 'ログアウト' do
     before do
       login_as(user)
     end

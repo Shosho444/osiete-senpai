@@ -1,4 +1,5 @@
 class UserSessionsController < ApplicationController
+  skip_before_action :require_login, only: [:new, :create]
   def new
   end
 
@@ -14,7 +15,6 @@ class UserSessionsController < ApplicationController
 
   def destroy
     logout
-    flash[:success] = 'ログアウトしました'
-    redirect_back_or_to root_path
+    redirect_to root_path, status: :see_other, flash: { success: 'ログアウトしました' }
   end
 end

@@ -19,12 +19,10 @@ RSpec.describe User, type: :model do
     user.email = nil
     user.name = nil
     user.password_confirmation = nil
-    user.email_confirmation = nil
     user.valid?
     expect(user.errors[:email]).to include('を入力してください')
     expect(user.errors[:name]).to include('を入力してください')
     expect(user.errors[:password_confirmation]).to include('を入力してください')
-    expect(user.errors[:email_confirmation]).to include('を入力してください')
   end
 
   it '姓名は255文字以下であること' do
@@ -45,5 +43,12 @@ RSpec.describe User, type: :model do
     user.valid?
     expect(user.errors[:email]).to include('の形式が正しくありません')
     expect(user.errors[:password]).to include('に英数字を含めてください')
+  end
+
+  it '確認用のパスワードメールアドレスが必須項目であること' do
+    user = build(:user)
+    user.email_confirmation = nil
+    user.valid?
+    expect(user.errors[:email_confirmation]).to include('を入力してください')
   end
 end
