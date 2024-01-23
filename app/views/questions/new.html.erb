@@ -1,0 +1,35 @@
+<div class="hero bg-white py-28">
+    <div class="shrink-0  shadow-2xl bg-base-100 bg-white rounded-2xl w-2/5 min-w-96">
+    <%= form_with model: @form, url: questions_path, class:"card-body" do |f| %>
+      <div class="form-control">
+        <%= render 'layouts/error_message', model: @form %>
+      </div>
+      <div class="form-control">
+        <%= f.label:subject,class:"label label-text" %>
+        <%= f.text_area :subject, class:'textarea textarea-success w-full', placeholder:"テーマ" %>
+      </div>
+      <div class="form-control">
+        <%= f.label:body,class:"label label-text" %>
+        <%= f.text_area :body, class: 'textarea textarea-success w-full', placeholder:"本文" %>
+      </div>
+      <div class="form-control">
+        <%= f.label:deadline, '締切期間(時間はスクロールできます)',class:"label label-text" %>
+        <%= f.datetime_field :deadline, min:Time.now.midnight.tomorrow, class:'w-full'%>
+      </div>
+      <div class="form-control label-text">業種</div>
+      <div class='grid grid-rows-3 grid-flow-row grid-flow-col'>
+        <%= f.collection_check_boxes :profession_ids, Profession.industries, :last, :first, include_hidden: false do |q| %>
+          <div class='flex items-center'>
+            <%= q.check_box(class: 'checkbox checkbox-success checkbox-xs') %>
+            <%= q.label {q.text} %>
+          </div>
+        <% end %>
+      </div>
+      <div class="form-control mt-4">
+        <%= f.submit "質問を作成する", class: "btn bg-green-500 hover:bg-green-600 w-full" %>
+      </div>
+    <% end %>
+    <div class="form-control">
+    </div>
+    </div>
+</div>

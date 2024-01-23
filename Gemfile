@@ -34,6 +34,8 @@ gem "dotenv-rails"
 gem 'sorcery'
 
 gem 'rails-i18n'
+
+gem 'aws-sdk-comprehend'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

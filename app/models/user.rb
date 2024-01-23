@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
+  has_many :questions, dependent: :destroy
 
   pass_f = /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]+\z/i
   validates :password, length: { minimum: 6 }, if: -> { new_record? || changes[:crypted_password] }

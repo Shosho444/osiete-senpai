@@ -10,3 +10,17 @@ ja:
         password_confirmation: '確認用パスワード'
         name: '名前'
         introduction: '自己紹介文'
+      question:
+        subject: 'テーマ'
+        body: '本文'
+        deadline: '締切'
+  activemodel:
+    attributes:
+      question_form:
+        subject: 'テーマ'
+        body: '本文'
+        deadline: '締切期間'
+        profession_ids: '業種'
+
+            
+        

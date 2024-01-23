@@ -10,9 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_07_084711) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_18_032710) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "professions", force: :cascade do |t|
+    t.integer "industry", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "question_professions", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.bigint "profession_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profession_id"], name: "index_question_professions_on_profession_id"
+    t.index ["question_id"], name: "index_question_professions_on_question_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "subject", null: false
+    t.text "body", null: false
+    t.datetime "deadline"
+    t.string "keyword", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_questions_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
@@ -25,4 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_07_084711) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "question_professions", "professions"
+  add_foreign_key "question_professions", "questions"
+  add_foreign_key "questions", "users"
 end

@@ -17,8 +17,8 @@
         </div>
         <% if @user.introduction.present? %>
           <div>
-            <div class="label label-text flex justify-center">紹介</div>
-            <p class="label label-text"><%=@user.introduction%></p>
+            <div >紹介</div>
+            <p class='border-2 border-green-600/75 rounded'><%=@user.introduction%></p>
           </div>
         <% end %>
         <% if @user == current_user %>
