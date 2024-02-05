@@ -1,6 +1,7 @@
-<div class="hero bg-white py-28">
-    <div class="shrink-0  shadow-2xl bg-base-100 bg-white rounded-2xl w-2/5 min-w-96">
+<div class="hero bg-white py-12">
+    <div class="shrink-0 shadow-xl bg-base-100 bg-white rounded-2xl w-2/5 min-w-96">
     <%= form_with model: @form, url: questions_path, class:"card-body" do |f| %>
+      <div class="flex justify-center text-2xl">質問作成</div>
       <div class="form-control">
         <%= render 'layouts/error_message', model: @form %>
       </div>
@@ -13,12 +14,15 @@
         <%= f.text_area :body, class: 'textarea textarea-success w-full', placeholder:"本文" %>
       </div>
       <div class="form-control">
-        <%= f.label:deadline, '締切期間(時間はスクロールできます)',class:"label label-text" %>
-        <%= f.datetime_field :deadline, min:Time.now.midnight.tomorrow, class:'w-full'%>
+        <div class="label label-text">締切期間</div>
+        <div class="flex w-full space-x-1">
+          <%= f.date_field :deadline_date, min:Date.tomorrow, class:'w-full border border-green-600 rounded'%>
+          <%= f.select :deadline_time, (0..23).map(&:to_s), { include_blank: "時間" }, class:'w-full border border-green-600 rounded'%>
+        </div>
       </div>
       <div class="form-control label-text">業種</div>
       <div class='grid grid-rows-3 grid-flow-row grid-flow-col'>
-        <%= f.collection_check_boxes :profession_ids, Profession.industries, :last, :first, include_hidden: false do |q| %>
+        <%= f.collection_check_boxes :profession_ids, @industries, :last, :first, include_hidden: false do |q| %>
           <div class='flex items-center'>
             <%= q.check_box(class: 'checkbox checkbox-success checkbox-xs') %>
             <%= q.label {q.text} %>

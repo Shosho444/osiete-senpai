@@ -15,4 +15,8 @@ class Profession < ApplicationRecord
     'サービス業': 8,
     'その他の産業': 9
   }
+
+  def self.ransackable_attributes(_auth_object = nil)
+    ['industry']
+  end
 end

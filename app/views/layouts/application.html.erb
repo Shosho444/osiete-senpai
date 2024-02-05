@@ -11,11 +11,7 @@
   </head>
 
   <body>
-    <% if logged_in?  %>
-      <%= render 'layouts/login_header' %>
-    <% else %>
-      <%= render 'layouts/header' %>
-    <% end %>
+    <%= render 'layouts/header' %>
     <%= render 'layouts/flash_message' %>
      <%= yield %>
     <%= render 'layouts/footer' %>

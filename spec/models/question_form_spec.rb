@@ -12,7 +12,8 @@ RSpec.describe @questionform, type: :model do
         expect(@questionform).to be_valid
       end
       it '業種が空欄でも上手くいくこと' do
-        @questionform.deadline = ''
+        @questionform.deadline_date = ''
+        @questionform.deadline_time = ''
         expect(@questionform).to be_valid
       end
       it '本文が10666文字以下の場合成功すること' do
@@ -46,17 +47,27 @@ RSpec.describe @questionform, type: :model do
       end
       it '12時以前で今日を選んでいる時失敗すること' do
         travel_to Time.current.beginning_of_day do
-          @questionform.deadline = Time.current
+          @questionform.deadline_date = Time.zone.today
           @questionform.valid?
           expect(@questionform.errors[:deadline]).to include('は明日以降の時間を選択してください')
         end
       end
-      it '12時以降で今日を選んでいる時失敗すること' do
+      it '12時以降で明日を選んでいる時失敗すること' do
         travel_to Time.current.beginning_of_day + 12.hours do
-          @questionform.deadline = Time.current.tomorrow
+          @questionform.deadline_date = Time.zone.tomorrow
           @questionform.valid?
           expect(@questionform.errors[:deadline]).to include('は明後日以降の時間を選択してください')
         end
+      end
+      it '日付を選んでいない場合失敗すること' do
+        @questionform.deadline_date = ''
+        @questionform.valid?
+        expect(@questionform.errors.full_messages).to include('日付と時間の両方を入力してください')
+      end
+      it '時間を選んでいない場合失敗すること' do
+        @questionform.deadline_time = ''
+        @questionform.valid?
+        expect(@questionform.errors.full_messages).to include('日付と時間の両方を入力してください')
       end
     end
   end

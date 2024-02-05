@@ -1,0 +1,10 @@
+<div class="dropdown dropdown-end dropdown-hover">
+  <label tabindex="0" class="flex flex-col text-green-600 hover:text-gray-300">
+    <i class="fa-solid fa-circle-user fa-lg"></i>
+    <p><%= current_user.name %></p>
+  </label>
+  <div tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+    <li><%= link_to "プロフィール", user_path(current_user),class: "text-green-600 hover:text-gray-300"%></li>
+    <li><%= link_to "ログアウト", logout_path, class: "text-green-600 hover:text-gray-300", data: { turbo_method: :delete } %></li>
+  </div>
+</div>  

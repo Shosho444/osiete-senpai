@@ -1,10 +1,18 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @question %>
-
-<div>
-  <%= link_to "Edit this question", edit_question_path(@question) %> |
-  <%= link_to "Back to questions", questions_path %>
-
-  <%= button_to "Destroy this question", @question, method: :delete %>
+<div class="hero bg-white">
+  <div class="w-3/6 py-8">
+    <div class="p-4 border-2 border-green-600 space-y-2">
+      <div class="flex items-center justify-between">
+        <%= link_to  user_path(@question.user), class: "flex items-center justify-between" do %>
+          <i class="fa-solid fa-circle-user fa-2x pr-2"></i>
+          <div class="text-xl"><%= @question.user.name %></div>
+        <% end %>
+        <div class="flex">
+          <%=render partial: 'profession', collection:@question.professions, as: 'profession'%>
+        </div>
+      </div>
+      <%= @question.decorate.deadline_days if @question.deadline.present? %>
+      <div class="text-3xl"><%= @question.subject %></div>
+      <%= @question.body %>
+    </div>
+  </div>
 </div>

@@ -1,28 +1,22 @@
 <header class="sticky top-0 z-10">
- <nav class="border-8 border-green-600 p-8 bg-white">
-  <div class="container mx-auto flex justify-between items-center">
-    <%= link_to "教えて先輩!", root_path, class: "text-green-600 hover:text-gray-300 text-3xl font-fine" %>
-
-    <div class="flex space-x-4">
-      <%= link_to login_path ,class: "text-green-600 hover:text-gray-300" do %>
-        <div class="flex flex-col">
-          <i class="fa-solid fa-right-to-bracket fa-lg"></i>
-          <p>ログイン</p>
-        </div>
-      <% end %>
-      <%= link_to  new_user_path, class: "text-green-600 hover:text-gray-300" do %>
-        <div class="flex flex-col">
-          <i class="fa-regular fa-address-card fa-lg"></i>
-          <p>新規登録</p>
-        </div>
-      <% end %>
-      <%= link_to  new_question_path, class: "text-green-600 hover:text-gray-300" do %>
-        <div class="flex flex-col">
-          <i class="fa fa-question fa-lg"></i>
-          <p>質問する</p>
-        </div>
-      <% end %>
+  <nav class="border-4 border-green-600 p-8 bg-white">
+    <div class="container mx-auto flex justify-between items-center">
+      <%= render 'layouts/search' %>
+      <div class="flex space-x-4">
+        <%= logged_in? ? render('layouts/login') : render('layouts/logout') %>
+        <%= link_to  new_question_path, class: "text-green-600 hover:text-gray-300" do %>
+          <div class="flex flex-col">
+            <i class="fa fa-question fa-lg"></i>
+            <p>質問する</p>
+          </div>
+        <% end %>
+        <%= link_to  industries_path, class: "text-green-600 hover:text-gray-300" do %>
+          <div class="flex flex-col">
+            <i class="fa-solid fa-list fa-lg"></i>
+            <p>カテゴリ</p>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
- </nav>
- </header>
+  </nav>
+</header>

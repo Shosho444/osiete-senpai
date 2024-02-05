@@ -18,4 +18,12 @@ class Question < ApplicationRecord
       errors.add(:deadline, 'は明後日以降の時間を選択してください')
     end
   end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[body subject]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    ['professions']
+  end
 end

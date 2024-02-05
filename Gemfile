@@ -36,6 +36,10 @@ gem 'sorcery'
 gem 'rails-i18n'
 
 gem 'aws-sdk-comprehend'
+
+gem 'ransack'
+
+gem 'draper'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

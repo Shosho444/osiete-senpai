@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  root "tops#index"
+  root "questions#index"
   resources :users, only: %i[new create show edit update]
   resources :questions
+  resources :industries, only: %i[index]
 
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'

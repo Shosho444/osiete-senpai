@@ -1,0 +1,12 @@
+<div class="hero bg-neutral-50 py-12">
+  <div class="w-1/2 min-w-96 grid grid-cols-3 gap-4">
+    <% @industries.each do |industry| %>
+        <%= link_to questions_path(@q, q: { professions_industry_eq: industry.last }) do %>
+          <div class='bg-white h-12 flex justify-between items-center rounded-lg px-2 border border-green-600 hover:text-gray-500'>
+            <p><%= industry.first %></p>
+            <p>></p>
+          </div>
+        <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="flex items-center space-x-4">
+  <%= link_to "教えて先輩!", root_path, class: "text-green-600 hover:text-gray-300 text-3xl font-fine" %>
+  <% unless ['new', 'edit'].include?(action_name) %>
+    <%= search_form_for @search, url: questions_path do |f| %>
+      <div class='join h-8'>
+        <%= f.text_field :subject_or_body_cont, placeholder: "気になるワードを入力", class:'border join-item' %>
+        <%= f.submit "検索", class:'bg-green-500 hover:bg-green-400 join-item text-white' %>
+      </div>
+    <% end %>  
+  <% end %>
+</div>

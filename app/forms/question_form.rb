@@ -1,14 +1,18 @@
 class QuestionForm
   include ActiveModel::Model # 通常のモデルのようにvalidationなどを使えるようにする
   include ActiveModel::Attributes # ActiveRecordのカラムのような属性を加えられるようにする
-  include ActiveRecord::AttributeAssignment
+  include ActiveModel::Validations::Callbacks
 
   attr_accessor :body
 
   attribute :user_id, :integer
   attribute :subject, :string
+  attribute :deadline_date, :date
+  attribute :deadline_time, :string
   attribute :deadline, :datetime
   attribute :profession_ids
+
+  before_validation :deadline_create
 
   validates :user_id, presence: true
   validates :subject, length: { maximum: 255, minimum: 5 }
@@ -31,8 +35,7 @@ class QuestionForm
         ids << profession.id
       end
 
-      question = Question.new(question_params(ids, keyword))
-      question.save!
+      Question.create!(question_params(ids, keyword))
     end
     true
   rescue ActiveRecord::RecordInvalid => e
@@ -44,6 +47,8 @@ class QuestionForm
   private
 
   def finish_check
+    errors.add(:base, '日付と時間の両方を入力してください') if deadline_date.present? ^ deadline_time.present?
+
     return if deadline.blank?
 
     if Time.current.hour < 12
@@ -51,6 +56,12 @@ class QuestionForm
     elsif deadline < Time.current.midnight.since(2.days)
       errors.add(:deadline, 'は明後日以降の時間を選択してください')
     end
+  end
+
+  def deadline_create
+    return unless deadline_date.present? && deadline_time.present?
+
+    self.deadline = Time.zone.parse("#{deadline_date} #{deadline_time}:00:00")
   end
 
   def question_params(params_ids, params_keyword)
