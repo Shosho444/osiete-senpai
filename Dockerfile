@@ -18,7 +18,7 @@ RUN bundle install
 
 COPY package.json yarn.lock /test_app/
 
-RUN yarn install
+RUN yarn install --network-timeout 100000
 
 RUN yarn add daisyui
 
