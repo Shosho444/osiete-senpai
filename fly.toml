@@ -24,3 +24,4 @@ primary_region = "nrt"
 
 [env]
   HOSTNAME = "0.0.0.0"
+  #変更点 errorが出るため
