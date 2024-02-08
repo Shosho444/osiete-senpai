@@ -59,6 +59,12 @@ RSpec.describe '質問', type: :system do
       click_button '検索'
       expect(page).to have_content(question.subject), '検索されていません'
     end
+    it '分割した単語が表示される' do
+      visit root_path
+      fill_in 'q[subject_or_body_cont]', with: '秋 好き'
+      click_button '検索'
+      expect(page).to have_content(question.subject), '検索されていません'
+    end
     it '検索項目がない場合、正しく表示される' do
       visit root_path
       fill_in 'q[subject_or_body_cont]', with: 'この項目は見つかりません'
