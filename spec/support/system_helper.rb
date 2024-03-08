@@ -8,6 +8,10 @@ module SystemHelper
     end
   end
 
+  def create_like(type,user)
+    let!(:like) { create(:like, user:user, likeable_type:type.class.name, likeable_id:type.id) }
+  end
+
   RSpec.configure do |config|
     config.include SystemHelper
   end

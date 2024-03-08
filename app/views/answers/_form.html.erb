@@ -1,0 +1,23 @@
+<div class="collapse-content bg-white" id='answer-form'> 
+    <%= form_with(model:[question,answer]) do |f| %>
+      <div class="form-control">
+        <%= render 'hidden/error_message', model: f.object %>
+      </div>
+      <div class="form-control">
+        <%= f.label:must,class:"label label-text" %>
+        <%= f.text_area :must, class: 'textarea textarea-success h-40 w-full', placeholder:"必要事項" %>
+      </div>
+      <div class="form-control">
+        <%= f.label:want,class:"label label-text" %>
+        <%= f.text_area :want, class:'textarea textarea-success h-40 w-full', placeholder:"追加事項" %>
+      </div>
+      <div class="form-control">
+        <%= f.label:body,class:"label label-text" %>
+        <%= f.text_area :body, class:'textarea textarea-success h-60 w-full', placeholder:"5文字以上入力してください" %>
+      </div>
+      <%= f.hidden_field :question_id, value: question.id %>
+      <div class="form-control mt-4">
+        <%= f.submit "回答を作成する", class: "btn bg-green-500 hover:bg-green-600 w-full" %>
+      </div>
+    <% end %>
+</div>

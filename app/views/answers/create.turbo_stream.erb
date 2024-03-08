@@ -1,0 +1,12 @@
+<% if @answer.errors.present? %>
+  <%= turbo_stream.replace 'answer-form' do %>
+    <%= render 'answers/form', answer: @answer, question: @answer.question %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.prepend 'table-answer' do %>
+    <%= render 'answers/answer', answer: @answer  %>
+  <% end %>
+  <%= turbo_stream.replace 'answer-form' do %>
+    <%= render 'answers/form', answer: Answer.new, question: @answer.question %>
+  <% end %>
+<% end %>

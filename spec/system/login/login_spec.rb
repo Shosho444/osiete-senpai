@@ -24,10 +24,17 @@ RSpec.describe 'ログイン', type: :system do
   end
 
   context 'ログインしていない場合' do
-    it 'ログインページにリダイレクトされること' do
+    it 'モーダルが表示されること' do
       visit edit_user_path(user)
-      expect(current_path).to eq('/login'), 'ログイン失敗時にログイン画面に戻ってきていません'
-      expect(page).to have_content('ログインしてください'), 'フラッシュメッセージ「ログインしてください」が表示されていません'
+      expect(current_path).to eq(recommendation_path), 'ログイン失敗時に確認画面に戻ってきていません'
+      expect(page).to have_content('ログインが必要です'), 'フラッシュメッセージ「ログインしてください」が表示されていません'
+    end
+    it 'きちんと登録ページに左遷すること' do
+      visit edit_user_path(user)
+      within('#check') do
+        click_on '新規登録'
+      end
+      expect(current_path).to eq(new_user_path), '登録ページに遷移しておりません'
     end
   end
 

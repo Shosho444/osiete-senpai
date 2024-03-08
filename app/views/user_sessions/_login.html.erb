@@ -1,0 +1,18 @@
+<%= form_with url: login_path,class:"card-body" do |f| %>
+    <div class="form-control">
+      <%= f.label:email,class:"label label-text" %>
+      <%= f.email_field :email, class: 'input input-bordered input-success', placeholder:"email" %>
+    </div>
+    <div class="form-control">
+      <%= f.label:password,class:"label label-text" %>
+      <%= f.password_field :password, class: 'input input-bordered input-success', placeholder:"password" %>
+    </div>
+    <div class="flex items-center place-content-center">
+      <a href="#" class="label-text-alt link link-hover">パスワードの変更</a>
+      <div>|</div>
+      <%= link_to '新規登録はこちら', new_user_path, class: "label-text-alt link link-hover"%>
+    </div>
+    <div class="form-control mt-4">
+      <%= f.submit "ログイン", class: "btn bg-green-500 hover:bg-green-600 w-full", id:'log' %>
+    </div>
+<% end %>

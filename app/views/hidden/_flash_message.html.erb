@@ -1,0 +1,7 @@
+<% flash.each do |message_type, message| %>
+  <div class='flex justify-center'>
+    <div class='alert <%= flash_message(message_type) %> text-white m-2 w-full flex justify-center'>
+      <%= message %>
+    </div>
+  </div>
+<% end %>

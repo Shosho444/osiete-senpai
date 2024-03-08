@@ -1,10 +1,35 @@
+<div>
 <h1 class="text-5xl font-bold underline py-5">
     Hello world!
 </h1>
 
 <button class="bg-sky-200 hover:bg-gray-200 text-white rounded px-4 py-2">tailwind</button>
-<button class="btn btn-secondary">daisyUI</button>
 
-<span>Your purchase has been confirmed!</span>
+<span >Your purchase has been confirmed!</span>
+<div data-controller="blur">
+<div tabindex="0" class="collapse bg-base-200" data-blur-target="collapse"> 
+  <div class="collapse-title text-xl font-medium" data-action="click->blur#change">
+    Focus me to see content
+    <div>
+    <input type="button" id="btn1" value="ボタン" data-action="click->blur#blur" data-blur-target="button" hidden>
+    </div>
+  </div>
+  <div class="collapse-content" data-blur-target="con"> 
+    <p>tabindex="0" attribute is necessary to make the div focusable</p>
+  </div>
 </div>
+<input type="button" id="btn1" value="ボタン" data-action="click->blur#focus">
 
+<div onclick="my_modal_1.showModal()">open modal</div>
+<dialog id="my_modal_1" class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Hello!</h3>
+    <p class="py-4">Press ESC key or click the button below to close</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>

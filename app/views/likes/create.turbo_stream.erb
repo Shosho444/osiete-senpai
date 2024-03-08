@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "notlike-#{@like.likeable_type}-#{@like.likeable_id}" do %>
+  <%= render partial: 'likes/like', locals: { type: @likes } %>
+<% end %>

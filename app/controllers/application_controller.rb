@@ -6,11 +6,14 @@ class ApplicationController < ActionController::Base
   def set_search
     request = request_judgment(params[:q]) if params[:q]
     @search = Question.ransack(request)
-    @questions = @search.result(distinct: true).includes(:professions)
+    @questions = @search.result(distinct: true).includes(:professions).page(params[:page]).per(10)
   end
 
   def not_authenticated
-    redirect_to login_path, flash: { error: 'ログインしてください' }
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('modal', partial: 'hidden/modalal') }
+      format.html { redirect_to recommendation_path, data: { turbo_frame: 'review_modal' } }
+    end
   end
 
   def request_judgment(hash)

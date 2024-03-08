@@ -5,6 +5,6 @@ FactoryBot.define do
     deadline_date { Time.zone.today.days_since(2) }
     deadline_time { '1' }
     profession_ids { %w[1 2] }
-    user_id { '1' }
+    association :user
   end
 end

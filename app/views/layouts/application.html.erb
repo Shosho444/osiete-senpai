@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TestApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,8 +10,10 @@
   </head>
 
   <body>
+    <div id='modal'></div>
+    <%= turbo_frame_tag 'review_modal' %>
     <%= render 'layouts/header' %>
-    <%= render 'layouts/flash_message' %>
+    <%= render 'hidden/flash_message' %>
      <%= yield %>
     <%= render 'layouts/footer' %>
   </body>

@@ -1,0 +1,5 @@
+<%= render 'hidden/modal' %>
+<div class="hero bg-white py-28 flex flex-col">
+  <div class='text-center'>大変申し訳ございません。選択したページはログインしていない場合使用できません</div>
+  <%= link_to '元のページに戻る', request.referer, class:'mt-4 btn btn bg-green-500 hover:bg-green-600 text-white w-1/2' %>
+</div>

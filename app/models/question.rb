@@ -3,11 +3,15 @@ class Question < ApplicationRecord
   has_many :question_professions, dependent: :destroy
   has_many :professions, through: :question_professions
   accepts_nested_attributes_for :question_professions
+  has_many :answers, dependent: :destroy
+  has_many :likes, as: :likeable, dependent: :destroy
 
   validates :subject, length: { maximum: 255 }, presence: true
   validates :keyword, length: { maximum: 255 }, presence: true
   validates :body, length: { maximum: 65_535 }, presence: true
   validate :finish_check
+
+  scope :other, ->(question) { where.not(id: question.id) }
 
   def finish_check
     return if deadline.blank?

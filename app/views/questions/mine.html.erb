@@ -1,0 +1,9 @@
+<div class="hero bg-white py-12">
+  <div class="flex flex-col w-7/12 space-y-4">
+    <p class='text-center text-3xl'>質問履歴</p>
+    <%= render(@questions) || content_tag(:p, '質問履歴はありません', class: "text-center text-xl") %>
+    <div class='flex justify-center'>
+      <%= paginate @questions %>
+    </div>
+  </div>
+</div>

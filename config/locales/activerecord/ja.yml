@@ -14,6 +14,10 @@ ja:
         subject: 'テーマ'
         body: '本文'
         deadline: '締切'
+      answer:
+        body: '本文'
+        must: '必要事項'
+        want: '追加事項'
   activemodel:
     attributes:
       question_form:

@@ -1,0 +1,16 @@
+<div id='modal'>
+  <%= turbo_frame_tag 'review_modal' do %>
+    <div class="fixed inset-0 flex items-center justify-center z-50 bg-gray-500 bg-opacity-50" data-controller="modals" data-modals-target="backGround" data-action="click->modals#closeBackground">
+      <div class="modal-content bg-white rounded-xl shadow-lg p-10 w-18 md:w-[450px]" data-modals-target="modal">
+        <div class="flex justify-end items-center">
+          <i class="fa-solid fa-xmark h-6 w-6 hover:text-yellow-500" data-action="click->modals#closeModal"></i>
+        </div>
+        <div class='flex flex-col' id='check'>
+          <p class='text-center text-2xl pb-2'>ログインが必要です</p>
+          <%= link_to 'ログイン', login_path ,class: "btn btn-outline btn-info mb-6", data: { turbo: false } %>
+          <%= link_to '新規登録', new_user_path, class: "btn btn-outline btn-info", data: { turbo: false } %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

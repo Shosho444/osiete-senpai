@@ -1,0 +1,20 @@
+<div class="p-4 border-2 border-green-600">
+  <div class='flex justify-between items-center'>
+    <%= link_to  user_path(answer.user),class:'flex items-center' do %>
+      <i class="fa-solid fa-circle-user fa-2x pr-2"></i>
+      <p class="text-xl"><%= answer.user.name %></p>
+    <% end %>
+    <p><%= l answer.created_at %></p>
+  </div>
+  <% answer_text.each do |text| %>
+    <p class='flex justify-center text-lg'><%= Answer.human_attribute_name(text) %></p>
+    <p class='border-2 border-slate-700 w-full'><%= answer.send(text)  %></p>
+  <% end %>
+  <div class='pt-2 flex justify-end'>
+  <% if answer.likes.exists?(user_id: current_user) %>
+    <%= render partial: 'likes/like', locals: { type: answer.likes } %>
+  <% else %>
+    <%= render partial: 'likes/notlike', locals: { type: answer } %>
+  <% end %>
+  </div>
+</div>

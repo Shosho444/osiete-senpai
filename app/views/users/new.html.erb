@@ -2,7 +2,7 @@
     <div class="shrink-0  shadow-2xl bg-base-100 bg-white rounded-2xl w-2/5 min-w-96">
     <%= form_with model: @user, class:"card-body" do |f| %>
       <div class="form-control">
-        <%= render 'layouts/error_message', model: @user %>
+        <%= render 'hidden/error_message', model: @user %>
       </div>
       <div class="form-control">
         <%= f.label:name,class:"label label-text" %>

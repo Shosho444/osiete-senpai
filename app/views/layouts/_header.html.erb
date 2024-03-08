@@ -4,7 +4,7 @@
       <%= render 'layouts/search' %>
       <div class="flex space-x-4">
         <%= logged_in? ? render('layouts/login') : render('layouts/logout') %>
-        <%= link_to  new_question_path, class: "text-green-600 hover:text-gray-300" do %>
+        <%= link_to logged_in? ? new_question_path : recommendation_path, class: "text-green-600 hover:text-gray-300",data: ({ turbo_frame: 'review_modal' } unless logged_in?) do %>
           <div class="flex flex-col">
             <i class="fa fa-question fa-lg"></i>
             <p>質問する</p>

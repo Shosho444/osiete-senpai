@@ -37,6 +37,11 @@ RSpec.configure do |config|
     Rails.root.join('spec/fixtures')
   ]
 
+  config.after do |example|
+    if example.metadata[:type] == :feature and example.exception.present? and example.metadata[:open_on_error] == true
+      save_and_open_page
+    end
+  end
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

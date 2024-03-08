@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe @questionform, type: :model do
-  describe '新規作成' do
+  describe '質問作成' do
     before do
       @login_user = create(:user)
       @questionform = build(:question_form, user_id: @login_user.id)

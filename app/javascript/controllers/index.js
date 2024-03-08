@@ -4,5 +4,11 @@
 
 import { application } from "./application"
 
+import CheckOutController from "./check_out_controller"
+application.register("check-out", CheckOutController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import ModalsController from "./modals_controller"
+application.register("modals", ModalsController)

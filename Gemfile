@@ -40,6 +40,8 @@ gem 'aws-sdk-comprehend'
 gem 'ransack'
 
 gem 'draper'
+
+gem 'kaminari'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

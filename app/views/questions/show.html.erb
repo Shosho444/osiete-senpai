@@ -1,7 +1,10 @@
-<div class="hero bg-white">
-  <div class="w-3/6 py-8">
+<div class="hero bg-white" data-controller='check-out' data-check-out-target='backGround'data-action='click->check-out#change'>
+  <div class="w-3/6 py-8 space-y-4" data-action='click->check-out#change'>
     <div class="p-4 border-2 border-green-600 space-y-2">
-      <div class="flex items-center justify-between">
+    <p class='text-right'>
+      <%= @question.decorate.deadline_days if @question.deadline.present? %>
+    </p>
+    <div class="flex items-center justify-between">
         <%= link_to  user_path(@question.user), class: "flex items-center justify-between" do %>
           <i class="fa-solid fa-circle-user fa-2x pr-2"></i>
           <div class="text-xl"><%= @question.user.name %></div>
@@ -10,9 +13,50 @@
           <%=render partial: 'profession', collection:@question.professions, as: 'profession'%>
         </div>
       </div>
-      <%= @question.decorate.deadline_days if @question.deadline.present? %>
       <div class="text-3xl"><%= @question.subject %></div>
-      <%= @question.body %>
+      <div class="flex items-center justify-between" >
+        <%= @question.body %>
+        <% if @question.likes.exists?(user_id: current_user)  %>
+          <%= render partial: 'likes/like', locals: { type: @question.likes } %>
+        <% else %>
+          <%= render partial: 'likes/notlike', locals: { type: @question } %>
+        <% end %>
+      </div>
+    </div>
+    <% if logged_in? %>
+    <div>
+      <div class="collapse bg-base-200 border-2 border-green-600 rounded-none bg-white">
+        <input type="checkbox" id='rspec_check' data-check-out-target='checkBox'> 
+        <div class="text-center collapse-title text-xl bg-white" >
+          <div data-check-out-target='text'>回答する</div>
+        </div>
+        <%= render partial: 'answers/form', locals: { answer: @answer, question: @question } %>
+      </div>
+    </div>
+    <% else %>
+      <%= link_to '回答する', recommendation_path, class:'btn bg-green-500 hover:bg-green-600 w-full text-white', data: { turbo_frame: 'review_modal' } %>
+    <% end %>
+    <div class ='space-y-3' id='table-answer'>
+      <% if @answers.present? %>
+        <p class='text-center text-xl'>回答一覧</p>
+        <%= render partial: 'answers/answer', collection: @answers %>
+        <div class='flex justify-center'>
+          <%= paginate @answers %>
+        </div>
+      <% else %>
+        <p class='text-center text-xl'>回答なし</p>
+      <% end %>
+    </div>
+    <div class ='flex flex-col space-y-2' id=rspec_answer>
+      <% if @similar_questions.present? %>
+        <p class='text-center text-xl'>類似した質問一覧</p>
+        <%=render partial: 'question', collection:@similar_questions, as: 'question'%>
+        <div class='flex justify-center'>
+          <%= paginate @similar_questions %>
+        </div>
+     <% else %>
+        <p class='text-center text-xl'>類似した質問はありません</p>
+     <% end %>
     </div>
   </div>
 </div>

@@ -10,12 +10,17 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1 or /questions/1.json
   def show
-    @question = Question.includes(:professions).find(params[:id])
+    @question = Question.includes(:professions, answers: :user).find(params[:id])
+    @answer = Answer.new
+    @answers = @question.answers.order(id: :desc).page(params[:page])
+    similar = Question.other(@question).ransack(subject_or_body_cont_any: key_word(@question))
+    @similar_questions = similar.result(distinct: true).includes(:professions).page(params[:page]).per(10)
   end
 
   # GET /questions/new
   def new
     @form = QuestionForm.new
+    @question = Question.new
   end
 
   # GET /questions/1/edit
@@ -42,6 +47,10 @@ class QuestionsController < ApplicationController
   def destroy
   end
 
+  def mine
+    @questions = Question.where(user_id: current_user.id).includes(:professions).page(params[:page]).per(10)
+  end
+
   private
 
   def set_question
@@ -57,5 +66,9 @@ class QuestionsController < ApplicationController
     params.require(:question_form)
           .permit(:subject, :body, :deadline_time, :deadline_date, profession_ids: [])
           .merge(user_id: current_user.id)
+  end
+
+  def key_word(word)
+    word.keyword.split(',')
   end
 end
