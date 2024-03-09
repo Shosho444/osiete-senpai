@@ -16,8 +16,8 @@ ja:
         deadline: '締切'
       answer:
         body: '本文'
-        must: '必要事項'
-        want: '追加事項'
+        must: '必要事項(must)'
+        want: '追加事項(want)'
   activemodel:
     attributes:
       question_form:
