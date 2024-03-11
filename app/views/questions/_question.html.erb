@@ -1,8 +1,8 @@
-<%= link_to  question_path(question), class: "border border-green-600 h-24 rounded opacity-80 w-full shadow-lg" do %>
-  <div class='h-full'>
-    <div class='m-2 flex justify-end'>
+<%= link_to  question_path(question), class: "border border-green-600 h-32 rounded opacity-80 w-full shadow-lg" do %>
+  <div class='relative h-full flex flex-col'>
+    <div class='m-0.5 flex flex-wrap'>
       <%=render partial: 'questions/profession', collection:question.professions, as: 'profession'%>
     </div>
-    <div class='flex items-center ml-2'><%= question.subject %></div>
+    <div class='absolute flex items-center ml-2 h-full'><%= question.subject %></div>
   </div>
 <% end %>
