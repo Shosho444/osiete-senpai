@@ -45,6 +45,9 @@ class QuestionsController < ApplicationController
 
   # DELETE /questions/1 or /questions/1.json
   def destroy
+    @uestion = current_user.questions.find(params[:id])
+    @uestion.destroy!
+    redirect_to root_path, status: :see_other, success: '質問を削除しました'
   end
 
   def mine
