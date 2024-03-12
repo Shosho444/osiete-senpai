@@ -1,21 +1,21 @@
 <div class="hero bg-white" data-controller='check-out' data-check-out-target='backGround'data-action='click->check-out#change'>
   <div class="w-3/6 py-8 space-y-4" data-action='click->check-out#change'>
-    <div class="p-4 border-2 border-green-600 space-y-2">
+    <div class="px-4 py-2 border-2 border-green-600 space-y-1">
     <p class='text-right'>
       <%= @question.decorate.deadline_days if @question.deadline.present? %>
     </p>
-    <div class="flex items-center justify-between">
+    <div class='flex justify-end flex-wrap'>
+      <%=render partial: 'profession', collection:@question.professions, as: 'profession'%>
+    </div>
+    <div class="flex items-center">
         <%= link_to  user_path(@question.user), class: "flex items-center justify-between" do %>
           <i class="fa-solid fa-circle-user fa-2x pr-2"></i>
           <div class="text-xl"><%= @question.user.name %></div>
         <% end %>
-        <div class="flex">
-          <%=render partial: 'profession', collection:@question.professions, as: 'profession'%>
-        </div>
       </div>
       <div class="text-3xl"><%= @question.subject %></div>
-      <div class="flex items-center justify-between" >
-        <%= @question.body %>
+      <div class="flex items-center"><%= @question.body %></div>
+      <div class="flex justify-end">
         <% if @question.likes.exists?(user_id: current_user)  %>
           <%= render partial: 'likes/like', locals: { type: @question.likes } %>
         <% else %>
