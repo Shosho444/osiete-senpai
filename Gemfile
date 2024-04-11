@@ -37,6 +37,10 @@ gem 'rails-i18n'
 
 gem 'aws-sdk-comprehend'
 
+gem 'mecab'
+
+gem 'natto'
+
 gem 'ransack'
 
 gem 'draper'
