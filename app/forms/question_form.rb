@@ -1,4 +1,5 @@
 class QuestionForm
+  require 'csv'
   include ActiveModel::Model # 通常のモデルのようにvalidationなどを使えるようにする
   include ActiveModel::Attributes # ActiveRecordのカラムのような属性を加えられるようにする
   include ActiveModel::Validations::Callbacks
@@ -87,9 +88,16 @@ class QuestionForm
     comprehend = comprehend_client
 
     response = comprehend.detect_key_phrases(text: subject_text, language_code: 'ja')
-    response.key_phrases.map(&:text).join(',')
+    response.key_phrases.map { |array| mecab(array.text) }.join(',')
   rescue StandardError
     errors.add(:base, 'もう一度テーマを入力してください')
     false
+  end
+
+  def mecab(subject_text)
+    mecab = Natto::MeCab.new.parse(subject_text)
+    array = CSV.parse(mecab.tr(',', "\t"), col_sep: "\t")
+    result = array.filter_map { |element| element[0] unless element[1] == '助詞' || element.size == 1 }
+    result.join(',')
   end
 end

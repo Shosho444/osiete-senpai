@@ -1,1 +1,1 @@
-task :build => 'assets:precompile'
+task build: 'assets:precompile'
